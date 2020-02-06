@@ -1,3 +1,5 @@
+import Background from './background';
+
 class Sprite {
 
 constructor(ctx, canvas) {
@@ -35,7 +37,6 @@ constructor(ctx, canvas) {
   
 
   this.img = new Image();
-  // this.img.src = "https://i.imgur.com/vvbTIR8.png";
   this.img.src = 'assets/rabbit.png'
   
 
@@ -55,35 +56,37 @@ constructor(ctx, canvas) {
 
   drawFrame(frameX, frameY, canvasX, canvasY) {
     // debugger
+    // this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
     this.ctx.drawImage(this.img,
-      frameX * this.width, frameY * this.height, this.width, this.height,
+      frameX * this.width, frameY * this.height, this.scaledWidth, this.scaledHeight,
       canvasX, canvasY, this.scaledWidth, this.scaledHeight);
   }
 
 
-  // step() {
-  //   this.frameCount++;
-  //   if (this.frameCount < 15) {
-  //     window.requestAnimationFrame(this.step);
-  //     return;
-  //   }
-  //   this.frameCount = 0;
-  //   // debugger;
-  //   this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-  //   this.drawFrame(this.cycleLoop[this.currentLoopIndex], 0, 0, 300);
-  //   this.currentLoopIndex++;
-  //   if (this.currentLoopIndex >= this.cycleLoop.length) {
-  //     this.currentLoopIndex = 0;
-  //   }
-  //   window.requestAnimationFrame(this.step);
-  //   }
+  step() {
+    this.frameCount++;
+    if (this.frameCount < 15) {
+      window.requestAnimationFrame(this.step);
+      return;
+    }
+    this.frameCount = 0;
+    // debugger;
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.drawFrame(this.cycleLoop[this.currentLoopIndex], 0, 0, 300);
+    this.currentLoopIndex++;
+    if (this.currentLoopIndex >= this.cycleLoop.length) {
+      this.currentLoopIndex = 0;
+    }
+    window.requestAnimationFrame(this.step);
+    }
 
 
-  moveCharacter(deltaX, deltaY) {
-    this.positionX += deltaX;
-    this.positionY += deltaY;
-    // currentDirection = direction;
-  }
+  // moveCharacter(deltaX, deltaY) {
+  //   this.positionX += deltaX;
+  //   this.positionY += deltaY;
+  //   // currentDirection = direction;
+  // }
 
   keyDownListener(event) {
     this.keyPresses[event.code] = true;
@@ -95,7 +98,7 @@ constructor(ctx, canvas) {
 
 
   gameLoop(){
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    // this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     let hasMoved = false;
 
     if (this.keyPresses.ArrowLeft) {
@@ -106,7 +109,7 @@ constructor(ctx, canvas) {
       hasMoved = true;
     } else if (this.keyPresses.Space){
       this.jump();
-      this.moveCharacter(this.movementSpeed + 2, 1);
+      this.moveCharacter(this.movementSpeed + 3, 2);
       hasMoved = true;
     } else {
       this.moveCharacter(this.movementSpeed, 0);
@@ -130,7 +133,7 @@ constructor(ctx, canvas) {
     //   this.currentLoopIndex = 0;
     // }
     this.drawFrame(this.cycleLoop[this.currentLoopIndex], this.direction, this.positionX, this.positionY);
-    window.requestAnimationFrame(this.gameLoop);
+    // window.requestAnimationFrame(this.gameLoop);
   }
 
   moveCharacter(deltaX, deltaY, direction) {

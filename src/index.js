@@ -1,6 +1,8 @@
 console.log("Webpack is working!");
 
-import Sprite from './sprite_animation';
+
+import Gameview from './game_view';
+import Background from './background';
 
 document.addEventListener("DOMContentLoaded", function () {
   const canvasEl = document.querySelector('canvas');
@@ -8,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // canvasEl.height = Game.DIM_Y;
   const ctx = canvasEl.getContext("2d");
   // debugger;
-  new Sprite(ctx, canvasEl);
+  new Gameview(ctx, canvasEl);
+  // new Background(ctx, canvasEl);
 
 });
