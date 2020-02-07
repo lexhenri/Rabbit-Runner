@@ -107,7 +107,7 @@ constructor(ctx, canvas) {
     } else if (this.keyPresses.ArrowRight) {
       this.moveCharacter(this.movementSpeed + 3, 0);
       hasMoved = true;
-    } else if (this.keyPresses.Space){
+    } else if (this.keyPresses.ArrowUp){
       this.jump();
       this.moveCharacter(this.movementSpeed + 3, 2);
       hasMoved = true;

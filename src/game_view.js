@@ -16,7 +16,7 @@ class Gameview {
 
   draw(){
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.background.bgLoop();
+    this.background.loop();
     this.sprite.gameLoop();
 
     window.requestAnimationFrame(this.draw);
